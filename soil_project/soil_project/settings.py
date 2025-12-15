@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'timescaledb',
     'soil_app'
 ]
 
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'soil_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'timescale.db.backends.postgresql',
+        'NAME': 'timescale',
+        'USER': 'timescale',
+        'PASSWORD': 'timescale',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
