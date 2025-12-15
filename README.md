@@ -1,5 +1,5 @@
 # SoilSensor
-Django and TimescaleDB assignment
+## Django and TimescaleDB assignment
 
-## Deployment
+### Deployment
 To deploy the application run ./deploy
