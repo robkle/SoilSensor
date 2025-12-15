@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'timescaledb',
+    'timescale',
     'soil_app'
 ]
 
@@ -78,11 +79,11 @@ WSGI_APPLICATION = 'soil_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'timescale.db.backends.postgresql',
-        'NAME': 'timescale',
-        'USER': 'timescale',
-        'PASSWORD': 'timescale',
+        'NAME': os.getenv('POSTGRES_DB', 'timescale'),
+        'USER': os.getenv('POSTGRES_USER', 'timescale'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'timescale'),
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
 

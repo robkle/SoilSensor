@@ -1,12 +1,19 @@
 services:
   timescaledb:
-    image: timescale/timescaledb:latest-pg17
+    image: ${TIMESCALE_IMAGE?-error}
     restart: always
     ports:
-      - 5432:5432
+      - ${POSTGRES_PORT_HOST:-5432}:${POSTGRES_PORT_CONTAINER:-5432}
     environment:
-      POSTGRES_DB: timescale
-      POSTGRES_USER: timescale
-      POSTGRESS_PASSWORD: timescale
+      POSTGRES_DB: ${POSTGRES_DB:-timescale}
+      POSTGRES_USER: ${POSTGRES_USER:-timescale}
+      POSTGRESS_PASSWORD: ${POSTGRES_PASSWORD:-error}
+      POSTGRESS_PORT: ${POSTGRES_PORT_CONTAINER:-5432}
     volumes:
       - ./data:/var/lib/postgresql/data
+  
+  django-web:
+    build: .
+    container_name: django_soil_app
+    ports:
+    - ${DJANGO_PORT_HOST:-8000}:${DJANGO_PORT_CONTAINER:-8000}
